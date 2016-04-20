@@ -21,7 +21,7 @@
 default['sagecrmconnector']['name'] = 'Sage CRM Connector'
 default['sagecrmconnector']['filename'] = 'Sage CRM Connector'
 default['sagecrmconnector']['filenameextension'] = 'exe'
-default['sagecrmconnector']['url'] = 'http://www.yourserver.com/' + default['sagecrmconnector']['filename'] + '.' + default['sagecrmconnector']['filenameextension'] 
+default['sagecrmconnector']['url'] = 'http://www.yourserver.com/' + node['sagecrmconnector']['filename'] + '.' + node['sagecrmconnector']['filenameextension'] 
 default['sagecrmconnector']['checksum'] = 'e1bf95842c030454c7d2984642d3fbf663eae1f4a95c7f02d2b05533725fcd5a'
 default['sagecrmconnector']['home'] = "#{Chef::Config['file_cache_path']}/#{node['sagecrmconnector']['filename']}/#{node['sagecrmconnector']['checksum']}"
 default['sagecrmconnector']['TARGETDIR'] = node['sagecrm']['application']['crm']['physical_path'] || 'C:\Program Files (x86)\Sage\CRM\CRM\WWWRoot'

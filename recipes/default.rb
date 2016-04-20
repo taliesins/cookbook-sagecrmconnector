@@ -20,10 +20,10 @@ end
 execute 'extract Sage CRM Connector msi' do
   command "#{filename} /extract:FOO"
   cwd download_directory
-  not_if {File.exists ? msi_path}
+  not_if { File.exists ? (msi_path) }
 end
 
-windows_package node['commvault']['name'] do
+windows_package node['sagecrmconnector']['name'] do
 	source msi_path
 	options "TARGETDIR=\"#{node['sagecrmconnector']['TARGETDIR']}\""
 end
