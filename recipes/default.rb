@@ -12,15 +12,19 @@ download_directory = "#{Chef::Config['file_cache_path']}/#{node['sagecrmconnecto
 download_path = "#{download_directory}/#{filename}"
 msi_path = "#{download_directory}/#{node['sagecrmconnector']['filename']}.msi"
 
+directory download_directory do
+	recursive true
+end
+
 remote_file download_path do
   source node['sagecrmconnector']['url']
   checksum node['sagecrmconnector']['checksum']
 end
 
 execute 'extract Sage CRM Connector msi' do
-  command "#{filename} /extract:FOO"
+  command "\"#{filename}\" /extract:FOO"
   cwd download_directory
-  not_if { File.exists ? (msi_path) }
+  not_if File.exists?(msi_path)
 end
 
 windows_package node['sagecrmconnector']['name'] do
