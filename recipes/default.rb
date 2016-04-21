@@ -28,9 +28,9 @@ execute 'extract Sage CRM Connector msi' do
   not_if {File.exists?(msi_path)}
 end
 
-windows_package node['sagecrmconnector']['name'] do
-	source msi_path
-	installer_type :msi
-	options "TARGETDIR=\"#{node['sagecrmconnector']['TARGETDIR']}\" /log \"#{install_log_path}\""
-	not_if File.exists?(install_log_path)
+#The installer requires the current working directory to be where the msi is, so windows_package won't work
+execute "Install #{node['sagecrmconnector']['name']}" do
+  cwd download_directory
+  command "msiexec /qn /i \"#{msi_path}\" TARGETDIR=\"#{node['sagecrmconnector']['TARGETDIR']}\" /log \"#{install_log_path}\""
+  not_if {File.exists?(install_log_path)}
 end
