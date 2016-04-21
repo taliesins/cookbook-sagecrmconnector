@@ -10,8 +10,8 @@
 filename = File.basename(node['sagecrmconnector']['url']).downcase
 download_directory = "#{Chef::Config['file_cache_path']}/#{node['sagecrmconnector']['filename']}/#{node['sagecrmconnector']['checksum']}"
 download_path = "#{download_directory}/#{filename}"
-msi_path = "#{download_directory}/#{node['sagecrmconnector']['filename']}.msi"
-install_log_path = "#{download_directory}/#{node['sagecrmconnector']['filename']}.log"
+msi_path = win_friendly_path("#{download_directory}/#{node['sagecrmconnector']['filename']}.msi")
+install_log_path = win_friendly_path("#{download_directory}/#{node['sagecrmconnector']['filename']}.log")
 
 directory download_directory do
 	recursive true
